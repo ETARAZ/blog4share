@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include("bootstrap") %> 
+    <title>blog</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">Blog Articles</h1>
+        <a href="/articles/new" class="btn btn-dark">
+            New Article
+        </a>
+        <% articles.forEach(article => { %>
+        <div class="card mt-1 mb-3">
+            <div class="card-body">
+                <div class="card-title mb-2"><%= article.title %> </div>
+                <div class="card-subtitle text-muted mb-2"><%= article.date.toLocaleDateString()%></div>
+                <div class="card-text"><%= article.description %></div>
+
+                <a href="/articles/<%= article.slug %>" class="btn btn-primary">Read More</a>
+                <form class="d-inline" action="/articles/<%= article.id %>?_method=DELETE" method="post">
+                    <button type="submit" class="btn btn-outline-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+    <% });  %> 
+    </div>
+</body>
+</html>
